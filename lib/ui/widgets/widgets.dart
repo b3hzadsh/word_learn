@@ -16,7 +16,7 @@ class MyWidgets {
       onTap: (startLoading, stopLoading, btnState) async {
         final player = AudioPlayer();
         // player.load();
-        var duration = await player.setAsset('assets/sounds/bsh.mp3');
+        var _ = await player.setAsset('assets/sounds/bsh.mp3');
         await player.play();
         if (btnState == ButtonState.Idle) {
           startLoading();
@@ -175,7 +175,7 @@ class MyWidgets {
         ],
       ),
       onTap: () {
-        if (routeNmae != "exit") {
+        if (routeNmae != null) {
           Navigator.pushNamed(context, routeNmae);
         }
       },

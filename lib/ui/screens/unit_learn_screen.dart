@@ -32,13 +32,15 @@ class _UnitLearnScreenState extends State<UnitLearnScreen> {
         children: [
           Center(
             child: Container(
-              decoration: BoxDecoration(
+              child: Image.asset(
+                  "assets/images/animals/" + widget.lu.imageName + ".png"),
+              /* decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
                     "assets/images/animals/" + widget.lu.imageName + ".png",
                   ),
                 ),
-              ),
+              ), */
             ),
           )
         ],
@@ -50,13 +52,15 @@ class _UnitLearnScreenState extends State<UnitLearnScreen> {
     final player = AudioPlayer();
     // player.load();
     var _ = await player.setAsset(sAsset);
-    for (int i = 0; i < 2; i++) {
-      await player.play();
-      Future.delayed(
-        Duration(
-          milliseconds: 250,
-        ),
-      );
-    }
+
+    await player.play();
+    Future.delayed(
+      Duration(
+        milliseconds: 450,
+      ),
+    );
+    await player.stop();
+    await player.play();
+    await player.dispose();
   }
 }
