@@ -13,7 +13,8 @@ class ChooseCat extends StatelessWidget {
                 context: context,
                 imageAsset: "assets/images/animals/sheep.png",
                 title: "حیوانات",
-                routeNmae: "/learnPage/animals"),
+                routeNmae:
+                    "/learnPage/animals"), // a number after category to determin last learnt word
             MyWidgets.imageButton(
               context: context,
               imageAsset: "assets/images/animals/bear.png",

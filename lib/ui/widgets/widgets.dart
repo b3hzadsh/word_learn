@@ -3,7 +3,7 @@ import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:just_audio/just_audio.dart' show AudioPlayer;
+// import 'package:just_audio/just_audio.dart' show AudioPlayer;
 import 'package:word_learn/utils/colors.dart';
 
 class MyWidgets {
@@ -14,10 +14,10 @@ class MyWidgets {
       roundLoadingShape: true,
       width: MediaQuery.of(context).size.width * 0.65,
       onTap: (startLoading, stopLoading, btnState) async {
-        final player = AudioPlayer();
+        /* final player = AudioPlayer();
         // player.load();
         var _ = await player.setAsset('assets/sounds/bsh.mp3');
-        await player.play();
+        await player.play(); */
         if (btnState == ButtonState.Idle) {
           startLoading();
           if (routeName == "exit") {
