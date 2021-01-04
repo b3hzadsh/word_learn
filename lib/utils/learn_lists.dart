@@ -65,3 +65,18 @@ int getLength(String cat) {
   }
   return 0;
 }
+
+List findlist(String cat) {
+  switch (cat) {
+    case "animals":
+      return animals;
+
+      break;
+    case "colors":
+      return colors;
+
+      break;
+    default:
+  }
+  return [];
+}

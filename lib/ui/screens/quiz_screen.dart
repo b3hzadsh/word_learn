@@ -114,6 +114,12 @@ class _QuizeScreenState extends State<QuizeScreen> {
     await player.setAsset(sAsset);
     await pl.setAsset("assets/sounds/shortChoose.mp3");
     await player.play();
+    await player.stop();
+    /* Timer(
+        Duration(
+          milliseconds: 1150,
+        ),
+        () async {}); */
     // player.stop();
     await pl.play();
     await player.dispose();

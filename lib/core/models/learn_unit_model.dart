@@ -8,8 +8,10 @@ class UnitLearn {
   String imageAsset;
   String soundAsset;
   UnitLearn.name({@required this.name, @required this.cat}) {
-    imageAsset = "assets/images/$cat/" + name + ".png";
-    soundAsset = "assets/sounds/$cat/" + name + ".mp3";
+    this.imageAsset = "assets/images/$cat/" + name + ".png";
+    this.soundAsset = "assets/sounds/$cat/" + name + ".mp3";
+    List temp = findlist(cat);
+    index = temp.indexOf(name);
   }
   UnitLearn.index({@required this.index, @required this.cat}) {
     String imageName;
@@ -24,7 +26,7 @@ class UnitLearn {
         break;
       default:
     }
-    imageAsset = "assets/images/$cat/" + imageName + ".png";
-    soundAsset = "assets/sounds/$cat/" + imageName + ".mp3";
+    this.imageAsset = "assets/images/$cat/" + imageName + ".png";
+    this.soundAsset = "assets/sounds/$cat/" + imageName + ".mp3";
   }
 }

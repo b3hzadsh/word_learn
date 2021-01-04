@@ -43,13 +43,13 @@ class MyApp extends StatelessWidget {
       ),
       title: "words app",
       onGenerateRoute: (RouteSettings setting) {
+        var splitedRoute = setting.name.split("/");
         // create some route for every page and pushed named
         if (setting.name == "/") // for home
           return MaterialPageRoute(
-            builder: (context) => QuizeScreen(
-              lu: UnitLearn.index(cat: "animals", index: 2),
-            ),
-            //SplashScreen(), //  ProviderInt(),
+            builder: (context) => SplashScreen(),
+
+            //  ProviderInt(),
             // bring splash screen at startup
           );
         if (setting.name == "/screen/choose-cat") // for home
@@ -67,11 +67,29 @@ class MyApp extends StatelessWidget {
             builder: (context) => UnitLearnScreen(
               lu: UnitLearn.name(
                 cat: "animals",
-                name: "bat",
+                name: "sheep",
               ),
             ),
             // bring home
           );
+        /* QuizeScreen(
+              lu: UnitLearn.index(cat: "animals", index: 2),
+            ), */
+        //"/quizePage/${widget.lu.cat}/${widget.lu.index}"
+        if (splitedRoute[1] == "quizePage") {
+          //setting.name.substring(1, 10)
+          //var temp = setting.name.split("/");
+          print(splitedRoute[2]);
+          return MaterialPageRoute(
+            builder: (context) => QuizeScreen(
+              lu: UnitLearn.index(
+                cat: splitedRoute[2],
+                index: int.tryParse(splitedRoute[3]),
+              ),
+            ),
+            // bring home
+          );
+        } // for home
       },
     );
   }
