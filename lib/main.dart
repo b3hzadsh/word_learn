@@ -5,6 +5,7 @@ import 'package:word_learn/utils/colors.dart';
 import 'core/models/learn_unit_model.dart';
 import 'ui/screens/choose_cat.dart';
 import 'ui/screens/home.dart';
+import 'ui/screens/quiz_screen.dart';
 import 'ui/screens/splash_screen.dart';
 import 'ui/screens/unit_learn_screen.dart';
 
@@ -45,7 +46,10 @@ class MyApp extends StatelessWidget {
         // create some route for every page and pushed named
         if (setting.name == "/") // for home
           return MaterialPageRoute(
-            builder: (context) => SplashScreen(), //  ProviderInt(),
+            builder: (context) => QuizeScreen(
+              lu: UnitLearn.index(cat: "animals", index: 2),
+            ),
+            //SplashScreen(), //  ProviderInt(),
             // bring splash screen at startup
           );
         if (setting.name == "/screen/choose-cat") // for home
@@ -61,9 +65,9 @@ class MyApp extends StatelessWidget {
         if (setting.name == "/learnPage/animals") // for home
           return MaterialPageRoute(
             builder: (context) => UnitLearnScreen(
-              lu: UnitLearn(
-                imageName: "bat",
-                soundName: "bat",
+              lu: UnitLearn.name(
+                cat: "animals",
+                name: "bat",
               ),
             ),
             // bring home

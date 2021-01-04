@@ -26,7 +26,7 @@ class ProviderInt extends StatelessWidget {
         child: Icon(Icons.add),
         onPressed: () {
           // ctrIns.inc();
-          context.read<Counter>().inc();
+          context.read<Counter>().setCounter();
         },
       ),
     );

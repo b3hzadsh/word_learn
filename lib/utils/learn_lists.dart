@@ -1,4 +1,5 @@
 List<String> animals = [
+  // 0
   "bat",
   "bear",
   "caty",
@@ -28,6 +29,7 @@ List<String> animals = [
   "zebra",
 ];
 List<String> colors = [
+  // 1
   "black",
   "blue",
   "brown",
@@ -40,3 +42,26 @@ List<String> colors = [
   "white",
   "yellow",
 ];
+/* 
+Map listToNum = {
+  "animals": 1,
+  "colors": 2,
+
+  //
+  "1": animals.length,
+  "2": colors.length,
+}; */
+int getLength(String cat) {
+  switch (cat) {
+    case "animals":
+      return animals.length;
+
+      break;
+    case "colors":
+      return colors.length;
+
+      break;
+    default:
+  }
+  return 0;
+}

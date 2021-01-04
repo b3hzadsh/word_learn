@@ -16,9 +16,9 @@ class _UnitLearnScreenState extends State<UnitLearnScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 775), () {
+    Timer(Duration(milliseconds: 375), () {
       playSound(
-        "assets/sounds/animals/" + widget.lu.soundName + ".mp3",
+        widget.lu.soundAsset,
       );
     });
   }
@@ -32,8 +32,7 @@ class _UnitLearnScreenState extends State<UnitLearnScreen> {
         children: [
           Center(
             child: Container(
-              child: Image.asset(
-                  "assets/images/animals/" + widget.lu.imageName + ".png"),
+              child: Image.asset(widget.lu.imageAsset),
               /* decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
@@ -50,9 +49,7 @@ class _UnitLearnScreenState extends State<UnitLearnScreen> {
 
   playSound(String sAsset) async {
     final player = AudioPlayer();
-    // player.load();
     var _ = await player.setAsset(sAsset);
-
     await player.play();
     Future.delayed(
       Duration(

@@ -1,9 +1,16 @@
 import 'package:flutter/foundation.dart';
 
 class Counter with ChangeNotifier, DiagnosticableTreeMixin {
-  int counter = 5;
-  void inc() {
-    counter++;
+  bool _counter = false;
+  void setCounter() {
+    _counter = true;
     notifyListeners();
   }
+
+  void resetCounter() {
+    _counter = false;
+    notifyListeners();
+  }
+
+  get counter => _counter;
 }

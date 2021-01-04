@@ -1,16 +1,18 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:just_audio/just_audio.dart' show AudioPlayer;
 import 'package:word_learn/utils/colors.dart';
+import 'package:word_learn/utils/learn_lists.dart';
 
 class MyWidgets {
   static Widget myButton(
       {String title, BuildContext context, String routeName, double width}) {
     return ArgonButton(
-      height: MediaQuery.of(context).size.height * 7 / 100,
+      height: MediaQuery.of(context).size.height / 10,
       roundLoadingShape: true,
       width: MediaQuery.of(context).size.width * 0.65,
       onTap: (startLoading, stopLoading, btnState) async {
@@ -25,7 +27,7 @@ class MyWidgets {
           }
           Timer(
               Duration(
-                milliseconds: 700,
+                milliseconds: 400,
               ), () {
             Navigator.of(context).pushNamed(routeName);
 
@@ -138,6 +140,7 @@ class MyWidgets {
             //padding: EdgeInsets.all(10),
             margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
+              color: kgradientColor2,
               //color: kBackgroindColor,
               boxShadow: [
                 BoxShadow(
@@ -179,6 +182,127 @@ class MyWidgets {
           Navigator.pushNamed(context, routeNmae);
         }
       },
+    );
+  }
+
+  static Widget correctAnswerWidget(
+      int index, String category, BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    String imageName;
+    switch (category) {
+      case "animals":
+        imageName = animals[index];
+
+        break;
+      case "colors":
+        imageName = colors[index];
+
+        break;
+      default:
+    }
+
+    // Random x = new Random();
+    return Container(
+      width: width / 2.5,
+      height: width / 2,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(width / 13),
+        //color: Colors.yellow,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, -2),
+            blurRadius: 2,
+            color: kTextColor.withOpacity(0.2),
+          )
+        ],
+        gradient: LinearGradient(
+            colors: [
+              kgradientColor1,
+              kgradientColor2,
+            ],
+            begin: FractionalOffset(0.0, 0.0),
+            end: FractionalOffset(0.4, 0.0),
+            stops: [0.0, 7.0],
+            tileMode: TileMode.clamp),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          child: Image.asset(
+            "assets/images/$category/$imageName.png",
+            fit: BoxFit.scaleDown,
+          ),
+          onTap: () {
+            // show or say congurajulation an send to next learn page
+          },
+        ),
+      ),
+    );
+  }
+
+  static Widget wrongAnswerWidget(
+      int index, String category, BuildContext context) {
+    Random x = new Random();
+    var imageName;
+    var y = x.nextInt(9); //TODO change 9 to an better var or anything better
+    if (y != index) {
+      switch (category) {
+        case "animals":
+          imageName = animals[y];
+
+          break;
+        case "colors":
+          imageName = colors[y];
+
+          break;
+        default:
+      }
+    } else {
+      y = (x.nextInt(9) - y).abs();
+      switch (category) {
+        case "animals":
+          imageName = animals[y];
+
+          break;
+        case "colors":
+          imageName = colors[y];
+
+          break;
+        default:
+      }
+    }
+    var width = MediaQuery.of(context).size.width;
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(width / 13),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, -2),
+            blurRadius: 2,
+            color: kTextColor.withOpacity(0.2),
+          )
+        ],
+        gradient: LinearGradient(
+            colors: [
+              kgradientColor1,
+              kgradientColor2,
+            ],
+            begin: FractionalOffset(0.0, 0.0),
+            end: FractionalOffset(0.6, 0.0),
+            stops: [0.0, 0.7],
+            tileMode: TileMode.clamp),
+      ),
+      width: width / 2.5,
+      height: width / 2.5,
+      child: GestureDetector(
+        child: Image.asset(
+          "assets/images/$category/$imageName.png",
+        ),
+        onTap: () {
+          // show or say wrong anwser and try again
+        },
+      ),
     );
   }
 }
