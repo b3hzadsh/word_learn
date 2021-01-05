@@ -4,9 +4,11 @@ import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:just_audio/just_audio.dart';
 // import 'package:just_audio/just_audio.dart' show AudioPlayer;
 import 'package:word_learn/utils/colors.dart';
 import 'package:word_learn/utils/learn_lists.dart';
+import 'package:word_learn/utils/sharedprefs.dart';
 
 class MyWidgets {
   static Widget myButton(
@@ -187,6 +189,14 @@ class MyWidgets {
 
   static Widget correctAnswerWidget(
       int index, String category, BuildContext context) {
+    playSound(String sAsset) async {
+      final player = AudioPlayer();
+      var _ = await player.setAsset(sAsset);
+      await player.play();
+      await player.stop();
+      await player.dispose();
+    }
+
     var width = MediaQuery.of(context).size.width;
     String imageName;
     switch (category) {
@@ -200,8 +210,6 @@ class MyWidgets {
         break;
       default:
     }
-
-    // Random x = new Random();
     return Container(
       width: width / 2.5,
       height: width / 2,
@@ -233,7 +241,20 @@ class MyWidgets {
             fit: BoxFit.scaleDown,
           ),
           onTap: () {
-            // show or say congurajulation an send to next learn page
+            playSound("assets/sounds/cong.mp3");
+            index++;
+            if (category == "animals") {
+              sharedPrefs.animal = index;
+              Navigator.of(context).pushReplacementNamed(
+                "/learnPage/$category/${sharedPrefs.animal}",
+              );
+            }
+            if (category == "colors") {
+              sharedPrefs.color = index;
+              Navigator.of(context).pushReplacementNamed(
+                "/learnPage/$category/${sharedPrefs.color}",
+              );
+            }
           },
         ),
       ),

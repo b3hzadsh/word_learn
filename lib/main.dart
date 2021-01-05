@@ -8,8 +8,11 @@ import 'ui/screens/home.dart';
 import 'ui/screens/quiz_screen.dart';
 import 'ui/screens/splash_screen.dart';
 import 'ui/screens/unit_learn_screen.dart';
+import 'utils/sharedprefs.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await sharedPrefs.init();
   runApp(
     MultiProvider(
       child: MyApp(),
@@ -62,12 +65,15 @@ class MyApp extends StatelessWidget {
             builder: (context) => Home(),
             // bring home
           );
-        if (setting.name == "/learnPage/animals") // for home
+        // if (setting.name == "/learnPage/animals") // for home
+        if (splitedRoute[1] == "learnPage") // for home
           return MaterialPageRoute(
             builder: (context) => UnitLearnScreen(
-              lu: UnitLearn.name(
-                cat: "animals",
-                name: "sheep",
+              lu: UnitLearn.index(
+                cat: splitedRoute[2],
+                index: int.tryParse(
+                  splitedRoute[3],
+                ),
               ),
             ),
             // bring home
